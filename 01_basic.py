@@ -15,23 +15,16 @@ import os
 device = torch.accelerator.current_accelerator().type if torch.accelerator.is_available() else "cpu"
 print(f"Using {device} device")
 
-model = model_trainer.NeuralNetwork().to(device)
+model = model_trainer.Net().to(device)
 print(model)
-
-# Input data files are available in the read-only "../input/" directory
-# For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory
 
 for dirname, _, filenames in os.walk('data'):
     for filename in filenames:
         print(os.path.join(dirname, filename))
 
-# Load the training data
+# Load the data
 train_df = pd.read_parquet('data/train_data.parquet')
-
-# Load the test data
 test_df = pd.read_parquet('data/test_data.parquet')
-
-# print(train_df)
 
 # Sample prediction
 # test_df = test_df.replace(np.nan, 0.1)
@@ -42,7 +35,7 @@ test_df = pd.read_parquet('data/test_data.parquet')
 # submission_df = test_df[submission_cols]
 # submission_df.to_csv('output/submission.csv', index = False)
 
-# model_trainer.model_trainer(train_df, test_df)
+model_trainer.model_trainer(train_df, test_df)
 
 ## Data plotting
 # data_plotter.plot_train_nifty(train_df)
