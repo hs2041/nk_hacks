@@ -39,13 +39,14 @@ test_df = pd.read_parquet('data/test_data.parquet')
 # submission_df = test_df[submission_cols]
 # submission_df.to_csv('output/submission.csv', index = False)
 
-model_trainer.model_trainer(train_df, test_df)
+# model_trainer.model_trainer(train_df, test_df)
 
 ## Data plotting
 # data_plotter.plot_train_nifty(train_df)
 # data_plotter.plot_train_calls(train_df)
 # data_plotter.plot_train_puts(train_df)
 # data_plotter.plot_train_params(train_df)
+data_plotter.plot_test_one_call(test_df, train_df)
 
 ## Save files in csv format
 # train_df.to_csv("plots/train_data.csv", index = False)

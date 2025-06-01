@@ -2,6 +2,10 @@ import kagglehub
 import numpy as np # linear algebra
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 import matplotlib.pyplot as plt
+import helper.model_trainer as model_trainer
+import torch
+
+features = ['underlying', 'X0','X1','X2','X3','X4','X5','X6','X7','X8','X9','X10','X11','X12','X13','X14','X15','X16','X17','X18','X19','X20','X21','X22','X23','X24','X25','X26','X27','X28','X29','X30','X31','X32','X33','X34','X35','X36','X37','X38','X39','X40','X41']
 
 def plot_train_nifty(train_df):
     train_df.plot(x="timestamp", y='underlying', kind='line')
@@ -110,27 +114,17 @@ def plot_train_params(train_df):
     train_df.plot(x="timestamp", y='X41', kind='line')
     plt.show()
 
+def plot_test_one_call(test_df, train_df):
+    
+    X = train_df[features].values
+    X_tensor = torch.tensor(X, dtype=torch.float32)
+    loaded_model = model_trainer.Net()
+    loaded_model.load_state_dict(torch.load('models/01_test.pth'))
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    out = loaded_model(X_tensor)
+    print(out)
+    # for element in test_df:
+    #     print(element)
+    # train_df.plot(x="timestamp", y='call_iv_24000', kind='scatter')
+    # plt.show()
 
