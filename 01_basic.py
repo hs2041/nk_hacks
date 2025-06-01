@@ -15,6 +15,10 @@ import os
 device = torch.accelerator.current_accelerator().type if torch.accelerator.is_available() else "cpu"
 print(f"Using {device} device")
 
+# This command is ensuring that all the computation is done on GPU
+torch.set_default_tensor_type('torch.cuda.FloatTensor')
+
+
 model = model_trainer.Net().to(device)
 print(model)
 

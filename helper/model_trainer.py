@@ -44,9 +44,10 @@ def model_trainer(train_df, test_df):
     dataset = TensorDataset(X_tensor, Y_tensor)
 
     # Create DataLoader
-    dataloader = DataLoader(dataset, batch_size=100, shuffle=False)
+    dataloader = DataLoader(dataset, batch_size=200, shuffle=False)
 
     net = Net()
+    # net.cuda()
     criterion = torch.nn.MSELoss()
     optimizer = torch.optim.Adam(net.parameters(), lr=0.01)  # Using Adam optimizer
 
@@ -62,8 +63,8 @@ def model_trainer(train_df, test_df):
             optimizer.step()
             running_loss += loss.item()
             # if epoch % 100 == 0:
-            print("Epoch {}: Loss = {}".format(epoch, loss.detach().numpy()))
-
+            print("Epoch {}: Loss = {}".format(epoch, loss.detach().cpu().numpy()))
+    torch.save(net.state_dict(), 'models/01_test.pth')
 
 
     # Example of iterating through the data loader
