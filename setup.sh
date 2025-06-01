@@ -1,0 +1,1 @@
+source $HOME/.venvs/test_env/bin/activate
