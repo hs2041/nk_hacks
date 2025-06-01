@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 
 def plot_train_nifty(train_df):
     train_df.plot(x="timestamp", y='underlying', kind='line')
+    plt.show()
 
 def plot_train_calls(train_df):
     train_df.plot(x="timestamp", y='call_iv_23500', kind='line')
